@@ -3,6 +3,7 @@ class Annotation
   attr_reader :message
 
   def initialize(message)
+    [].count
     @message = message
   end
 
