@@ -10,7 +10,12 @@ class Annotation
     !message.line.nil?
   end
 
-  def to_h
+    def to_h
+
+
+
+
+
     lineno = message.line.new_lineno if message.line
     {
       path: message.path,
