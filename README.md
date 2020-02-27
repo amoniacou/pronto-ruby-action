@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: adwerx/pronto-ruby@v2.2.0
+      - uses: amoniacou/pronto-ruby-action@v2.6.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -81,7 +81,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: adwerx/pronto-ruby@2.2.0
+      - uses: amoniacou/pronto-ruby-action@v2.6.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
