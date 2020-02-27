@@ -20,14 +20,13 @@ The docker image of this Action includes the following [Pronto Runners](https://
 - reek
 - rubocop
 - scss
-- yamllint
 
 # Inputs
 
-| name | description | default |
-| --- | --- | --- |
-| `runners` | Space-separated list of pronto runners to run. Must be the preinstalled runners from the list above. | `rubocop` |
-| `target` | The git target pronto will diff against (`-c`) | `origin/master` |
+| name      | description                                                                                          | default         |
+| --------- | ---------------------------------------------------------------------------------------------------- | --------------- |
+| `runners` | Space-separated list of pronto runners to run. Must be the preinstalled runners from the list above. | `rubocop`       |
+| `target`  | The git target pronto will diff against (`-c`)                                                       | `origin/master` |
 
 # Secrets
 
@@ -36,9 +35,9 @@ A GitHub token is available by default when using actions, but you must include 
 Be sure to include the ENV variable in your job step:
 
 ```yaml
-    - uses: adwerx/pronto-ruby
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+- uses: adwerx/pronto-ruby
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 That's it!
@@ -62,11 +61,10 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: adwerx/pronto-ruby@v2.2.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - uses: actions/checkout@v1
+      - uses: adwerx/pronto-ruby@v2.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 With specific runners:
@@ -82,13 +80,13 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: adwerx/pronto-ruby@2.2.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        runners: >-
-          rubocop rails_schema yamllint
+      - uses: actions/checkout@v1
+      - uses: adwerx/pronto-ruby@2.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          runners: >-
+            rubocop rails_schema
 ```
 
 ### Development / Contributions

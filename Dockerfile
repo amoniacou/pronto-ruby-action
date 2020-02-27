@@ -1,30 +1,27 @@
-FROM ruby:2.5
+FROM ruby:2.6.5-alpine
 
-LABEL maintainer="Josh Bielick <jbielick@adwerx.com>"
-
-RUN apt-get update && \
-  apt-get install -y \
-  bash \
-  ruby-dev \
-  build-essential \
-  cmake \
-  git \
-  openssl \
-  yamllint \
-  && rm -rf /var/lib/apt/lists/*
-
-RUN gem install bundler
-
-WORKDIR /runner
-
+ENV PRONTO_HOME /runner
+ENV BUNDLE_GEMFILE ${PRONTO_HOME}/Gemfile
+WORKDIR ${PRONTO_HOME}
 COPY Gemfile* ./
 
-ENV BUNDLE_GEMFILE /runner/Gemfile
-
-RUN bundle --jobs 2 --retry 4
+RUN apk --no-cache add jq git libgit2 \
+  && apk add --update --no-cache --virtual pronto-builddeps \
+  cmake \
+  openssl \
+  openssl-dev \
+  build-base \
+  yaml-dev \
+  zlib-dev \
+  libgit2-dev \
+  && gem install bundler \
+  && addgroup -S pronto \
+  && adduser -S -G pronto -h ${PRONTO_HOME} pronto \
+  && bundle config build.rugged --use-system-libraries \
+  && bundle install && apk del --purge pronto-builddeps
 
 COPY . ./
 
-WORKDIR /data
+WORKDIR ${PRONTO_HOME}
 
 ENTRYPOINT ["/runner/pronto"]

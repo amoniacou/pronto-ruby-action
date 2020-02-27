@@ -7,11 +7,11 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Pronto Run
-      uses: ./
-      with:
-        runners: >-
-          rubocop bundler_audit brakeman yamllint
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v1
+      - name: Pronto Run
+        uses: ./
+        with:
+          runners: >-
+            rubocop bundler_audit brakeman
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
